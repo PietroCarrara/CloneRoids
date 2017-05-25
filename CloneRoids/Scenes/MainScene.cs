@@ -19,9 +19,9 @@ namespace CloneRoids.Scenes
             // pontos aqui
             var points = new Vector2[]
             {
-                new Vector2(0, 20),
+                new Vector2(0, 30),
                 new Vector2(10, 0),
-                new Vector2(20, 20)
+                new Vector2(20, 30)
             };
 
             // Criamos o jogador
@@ -29,7 +29,9 @@ namespace CloneRoids.Scenes
             // Adicionamos o colisor com os
             // pontos de antes
             player.addCollider(new PolygonCollider(points));
-            player.addComponent(new MovementComponent(300, 1));
+            player.addComponent(new ArcadeRigidbody())
+                .shouldUseGravity = false;
+            player.addComponent(new PhysicsMovementer(300, 2));
             player.addComponent(new RotationFixer());
         }
     }
