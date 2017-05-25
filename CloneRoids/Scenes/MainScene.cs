@@ -28,10 +28,21 @@ namespace CloneRoids.Scenes
             var player = createEntity("player");
             // Adicionamos o colisor com os
             // pontos de antes
-            player.addCollider(new PolygonCollider(points));
+
+            int i = 0;
+            Flags.setFlag(ref i, 7);
+            var coll = player.addCollider(new PolygonCollider(points));
+            coll.physicsLayer = i;
+            coll.collidesWithLayers = i;
+
             player.addComponent(new ArcadeRigidbody())
                 .shouldUseGravity = false;
-            player.addComponent(new PhysicsMovementer(300, 2));
+
+            player.addComponent(new PlayerPhysicsMovementer(
+                Constants.PlayerSpeed,
+                Constants.PlayerTurnSpeed));
+
+            player.addComponent(new Shooter());
             player.addComponent(new RotationFixer());
         }
     }

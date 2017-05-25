@@ -42,9 +42,12 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Components\Movementer.cs" />
-    <Compile Include="Components\PhysicsMovement.cs" />
+    <Compile Include="Components\PlayerMovementer.cs" />
+    <Compile Include="Components\PlayerPhysicsMovementer.cs" />
     <Compile Include="Components\RotationFixer.cs" />
+    <Compile Include="Components\Shooter.cs" />
+    <Compile Include="Components\Shot.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
