@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework;
 
 namespace CloneRoids.Components
 {
-    class MovementComponent : Component, IUpdatable
+    class Movementer : Component, IUpdatable
     {
         public int Speed, TurnSpeed;
 
@@ -20,7 +20,7 @@ namespace CloneRoids.Components
         /// </summary>
         /// <param name="speed">Velocidade em pixels por segundo</param>
         /// <param name="turnSpeed">Força do giro em radianos por segundo</param>
-        public MovementComponent(int speed = 0, int turnSpeed = 0)
+        public Movementer(int speed = 0, int turnSpeed = 0)
         {
             Speed = speed;
             TurnSpeed = turnSpeed;
