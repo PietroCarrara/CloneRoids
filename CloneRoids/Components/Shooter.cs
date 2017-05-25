@@ -36,6 +36,7 @@ namespace CloneRoids.Components
             collider.physicsLayer = i;
             collider.collidesWithLayers = i;
 
+            tiro.addComponent(new BorderTeleporter(20, 20, 1280, 720));
             tiro.addComponent(new Shot(Constants.ShootSpeed));
         }
     }
