@@ -44,6 +44,8 @@ namespace CloneRoids.Scenes
 
             player.addComponent(new Shooter());
             player.addComponent(new RotationFixer());
+
+            player.addComponent(new BorderTeleporter(20, 30, 1280, 720));
         }
     }
 }
