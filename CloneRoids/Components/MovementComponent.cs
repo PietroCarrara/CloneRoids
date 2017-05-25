@@ -14,6 +14,12 @@ namespace CloneRoids.Components
     {
         public int Speed, TurnSpeed;
 
+        /// <summary>
+        /// Responsável por realizar o movimento de uma entidade como um carro: 
+        /// só se move para frente e para traz, mas pode girar em torno de si mesma
+        /// </summary>
+        /// <param name="speed">Velocidade em pixels por segundo</param>
+        /// <param name="turnSpeed">Força do giro em radianos por segundo</param>
         public MovementComponent(int speed = 0, int turnSpeed = 0)
         {
             Speed = speed;
@@ -22,8 +28,11 @@ namespace CloneRoids.Components
 
         public void update()
         {
+            // Movimento total do jogador nos eixos X e Y;
             var movement = Vector2.Zero;
+            // Rotação realizada pelo jogador
             float rotation = 0;
+            // Velocidade desejada
             int velocity = 0;
 
             // Giro
