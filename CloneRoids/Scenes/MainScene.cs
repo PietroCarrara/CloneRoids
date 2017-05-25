@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 
 using CloneRoids.Components;
+using Nez.Sprites;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace CloneRoids.Scenes
 {
@@ -13,17 +15,11 @@ namespace CloneRoids.Scenes
 
             addRenderer(new DefaultRenderer());
 
-            // O triangulo tem 3 pontos,
-            // assim como nosso player
-            // definimos onde ficam esses
-            // pontos aqui
-            var points = new Vector2[]
-            {
-                new Vector2(0, 30),
-                new Vector2(10, 0),
-                new Vector2(20, 30)
-            };
+            CreatePlayer();
+        }
 
+        private void CreatePlayer()
+        {
             // Criamos o jogador
             var player = createEntity("player");
             // Adicionamos o colisor com os
@@ -31,9 +27,11 @@ namespace CloneRoids.Scenes
 
             int i = 0;
             Flags.setFlag(ref i, 7);
-            var coll = player.addCollider(new PolygonCollider(points));
+
+            var coll = player.addCollider(new BoxCollider(10, 15, 20, 30));
             coll.physicsLayer = i;
             coll.collidesWithLayers = i;
+            coll.setLocalOffset(new Vector2(0, 0));
 
             player.addComponent(new ArcadeRigidbody())
                 .shouldUseGravity = false;
@@ -46,6 +44,9 @@ namespace CloneRoids.Scenes
             player.addComponent(new RotationFixer());
 
             player.addComponent(new BorderTeleporter(20, 30, 1280, 720));
+
+            var playerTex = content.Load<Texture2D>("player");
+            player.addComponent(new Sprite(playerTex));
         }
     }
 }
