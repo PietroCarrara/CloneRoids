@@ -29,7 +29,9 @@ namespace CloneRoids.Scenes
             // Adicionamos o colisor com os
             // pontos de antes
             player.addCollider(new PolygonCollider(points));
-            player.addComponent(new MovementComponent(300, 1));
+            player.addComponent(new ArcadeRigidbody())
+                .shouldUseGravity = false;
+            player.addComponent(new PhysicsMovementer(300, 1));
             player.addComponent(new RotationFixer());
         }
     }

@@ -42,7 +42,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Components\MovementComponent.cs" />
+    <Compile Include="Components\Movementer.cs" />
+    <Compile Include="Components\PhysicsMovement.cs" />
     <Compile Include="Components\RotationFixer.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
