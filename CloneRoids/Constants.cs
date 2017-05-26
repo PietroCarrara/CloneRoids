@@ -32,5 +32,6 @@ namespace CloneRoids
 
         public const int PlayerLayer = 7;
         public const int ShootLayer = 8;
+        public const int AsteroidLayer = 9;
     }
 }

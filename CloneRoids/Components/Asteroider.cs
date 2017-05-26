@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Nez;
 using Microsoft.Xna.Framework;
 using CloneRoids.Scenes;
+using Microsoft.Xna.Framework.Graphics;
+using Nez.Sprites;
 
 namespace CloneRoids.Components
 {
@@ -14,8 +16,6 @@ namespace CloneRoids.Components
     {
         private int lives;
         private Collider collider;
-
-        private int hits = 3;
 
         public float Velocity;
 
@@ -53,15 +53,10 @@ namespace CloneRoids.Components
                 CollisionResult result;
                 if (collider.collidesWith(tiro.getCollider<Collider>(), out result))
                 {
-                    hits--;
+                    if (lives > 0)
+                        spawnChildren();
 
-                    if (hits <= 0)
-                    {
-                        if (lives > 0)
-                            spawnChildren();
-
-                        entity.destroy();
-                    }
+                    entity.destroy();
 
                     cena.DestroyProjectile(tiro);
                     
@@ -87,23 +82,32 @@ namespace CloneRoids.Components
 
         private void spawnChildren()
         {
+            var cena = entity.scene as MainScene;
+
             var radius = this.radius / 1.5f;
 
-            var child1 = entity.scene.createEntity("asteroid");
-            child1.addComponent(new PrototypeSprite(30, 30));
+            var texture = entity.scene.content.Load<Texture2D>("Sprites/Asteroid/main");
+
+            int layer = 0;
+            Flags.setFlag(ref layer, Constants.AsteroidLayer);
+
+            var child1 = cena.CreateAsteroid("asteroid");
+            child1.addComponent(new Sprite(texture));
             child1.addComponent(new Asteroider(lives - 1, Velocity * 1.1f, radius));
-            child1.transform.rotationDegrees = entity.transform.rotationDegrees + 90;
+            child1.transform.rotationDegrees = entity.transform.rotationDegrees + Nez.Random.nextInt(90) + 1;
             child1.transform.position = entity.transform.position;
-            child1.addCollider(new CircleCollider(radius));
+            child1.addCollider(new CircleCollider(radius))
+                .physicsLayer = layer;
             child1.addComponent(new BorderTeleporter(radius, radius,
                 Constants.ScreenWidth, Constants.ScreenHeight));
 
-            var child2 = entity.scene.createEntity("asteroid");
-            child2.addComponent(new PrototypeSprite(radius / 1.5f, radius));
+            var child2 = cena.CreateAsteroid("asteroid");
+            child2.addComponent(new Sprite(texture));
             child2.addComponent(new Asteroider(lives - 1, Velocity * 1.25f, radius));
-            child2.transform.rotationDegrees = entity.transform.rotationDegrees - 90;
+            child2.transform.rotationDegrees = entity.transform.rotationDegrees - Nez.Random.nextInt(90) + 1;
             child2.transform.position = entity.transform.position;
-            child2.addCollider(new CircleCollider(radius));
+            child2.addCollider(new CircleCollider(radius))
+                .physicsLayer = layer;
             child2.addComponent(new BorderTeleporter(radius, radius,
                 Constants.ScreenWidth, Constants.ScreenHeight));
         }

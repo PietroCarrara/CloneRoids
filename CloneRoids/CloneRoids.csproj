@@ -42,6 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\AsteroidCollider.cs" />
     <Compile Include="Components\Asteroider.cs" />
     <Compile Include="Components\BorderTeleporter.cs" />
     <Compile Include="Components\PlayerMovementer.cs" />
@@ -115,9 +116,9 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Nez-0.9.0\Nez-PCL\Nez-0.9.0.csproj">
+    <ProjectReference Include="..\..\Nez\Nez-PCL\Nez.csproj">
       <Project>{60b7197d-d0d5-405c-90a2-a56903e9b039}</Project>
-      <Name>Nez-0.9.0</Name>
+      <Name>Nez</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
