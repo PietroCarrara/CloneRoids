@@ -20,6 +20,12 @@ namespace CloneRoids
 
         public const int ShootRadius = 10;
 
+        public const int AsteroidRadius = 20;
+
+        public const int ScreenWidth = 1280;
+        public const int ScreenHeight = 720;
+
+
         public const float ShootLifeSpan = 1.5f;
 
         public const int ShootSpeed = 500;

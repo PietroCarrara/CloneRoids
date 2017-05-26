@@ -8,6 +8,7 @@ using Nez;
 using Microsoft.Xna.Framework.Input;
 using Nez.Sprites;
 using Microsoft.Xna.Framework.Graphics;
+using CloneRoids.Scenes;
 
 namespace CloneRoids.Components
 {
@@ -21,10 +22,12 @@ namespace CloneRoids.Components
         }
 
         private void createShoot()
-        { 
+        {
             // Pega a cena a qual esta entidade pertence,
             // e cria uma entidade nela
-            var tiro = entity.scene.createEntity("tiro", entity.transform.position);
+            var cena = entity.scene as MainScene;
+            var tiro = cena.CreateProjectile("tiro");
+            tiro.transform.position = entity.transform.position;
             tiro.transform.rotation = entity.transform.rotation;
 
             int i = 0;

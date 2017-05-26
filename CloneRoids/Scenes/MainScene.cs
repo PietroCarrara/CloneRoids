@@ -4,11 +4,14 @@ using Microsoft.Xna.Framework;
 using CloneRoids.Components;
 using Nez.Sprites;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace CloneRoids.Scenes
 {
     class MainScene : Scene
     {
+        public List<Entity> Projeteis = new List<Entity>();
+
         public override void initialize()
         {
             base.initialize();
@@ -18,6 +21,30 @@ namespace CloneRoids.Scenes
             clearColor = Color.Black;
 
             CreatePlayer();
+
+            var sla = createEntity("asteroid");
+            sla.transform.rotation += 2;
+            sla.addCollider(new CircleCollider(30));
+            sla.addComponent(new PrototypeSprite(20, 20).setColor(Color.Red));
+            sla.addComponent(new Asteroider(3, 200, 30));
+            sla.addComponent(new BorderTeleporter(30, 30, Constants.ScreenWidth, Constants.ScreenHeight));
+        }
+
+        public Entity CreateProjectile(string name)
+        {
+            var projetil = createEntity(name);
+
+            Projeteis.Add(projetil);
+
+            return projetil;
+        }
+
+        public void DestroyProjectile(Entity proj)
+        {
+            if(Projeteis.Remove(proj))
+            {
+                proj.destroy();
+            }
         }
 
         private void CreatePlayer()

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Nez;
 using Microsoft.Xna.Framework;
+using CloneRoids.Scenes;
 
 namespace CloneRoids.Components
 {
@@ -29,6 +30,8 @@ namespace CloneRoids.Components
         {
             base.onAddedToEntity();
 
+            var cena = entity.scene as MainScene;
+
             // Armazena os valores necessários para
             // calcular a velocidade. Assim economizamos
             // poder de processamento
@@ -37,7 +40,10 @@ namespace CloneRoids.Components
 
             // Depois de 3 segundos, mate esta entidade
             Core.schedule(Constants.ShootLifeSpan,
-                t => entity.destroy());
+                t =>
+                {
+                    cena.DestroyProjectile(entity);
+                });
         }
 
         public void update()
