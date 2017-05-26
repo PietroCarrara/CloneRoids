@@ -26,7 +26,7 @@ namespace CloneRoids.Scenes
             var texture = content.Load<Texture2D>("Sprites/Asteroid/main");
 
             int layer = 0;
-            Flags.setFlag(ref layer, Constants.PlayerLayer);
+            Flags.setFlag(ref layer, Constants.AsteroidLayer);
 
             var sla = CreateAsteroid("asteroid");
             sla.transform.rotation += 2;
