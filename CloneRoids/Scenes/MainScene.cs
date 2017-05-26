@@ -15,6 +15,7 @@ namespace CloneRoids.Scenes
 
             // Adiciona um renderizador normal
             addRenderer(new DefaultRenderer());
+            clearColor = Color.Black;
 
             CreatePlayer();
         }
@@ -58,7 +59,7 @@ namespace CloneRoids.Scenes
             player.addComponent(new BorderTeleporter(20, 30, 1280, 720));
 
             // Carrega e adiciona a foto
-            var playerTex = content.Load<Texture2D>("player");
+            var playerTex = content.Load<Texture2D>("Sprites/Player/main");
             player.addComponent(new Sprite(playerTex));
         }
     }

@@ -18,8 +18,9 @@ namespace CloneRoids
         public const int PlayerWidth = 20;
         public const int PlayerHeight = 30;
 
-        public const int ShootWidth = 20;
-        public const int ShootHeight = 20;
+        public const int ShootRadius = 10;
+
+        public const float ShootLifeSpan = 1.5f;
 
         public const int ShootSpeed = 500;
 

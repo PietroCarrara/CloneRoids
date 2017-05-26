@@ -36,7 +36,8 @@ namespace CloneRoids.Components
             cos = Mathf.cos(entity.transform.rotation);
 
             // Depois de 3 segundos, mate esta entidade
-            Core.schedule(3, t => entity.destroy());
+            Core.schedule(Constants.ShootLifeSpan,
+                t => entity.destroy());
         }
 
         public void update()

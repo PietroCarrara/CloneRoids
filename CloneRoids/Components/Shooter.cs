@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using Nez;
 using Microsoft.Xna.Framework.Input;
+using Nez.Sprites;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace CloneRoids.Components
 {
@@ -29,12 +31,14 @@ namespace CloneRoids.Components
             Flags.setFlag(ref i, Constants.ShootLayer);
 
             // Adiciona e configura  um colisor na entidade que criamos
-            var collider = tiro.addCollider(new BoxCollider(20, 20));
+            var collider = tiro.addCollider(new CircleCollider(Constants.ShootRadius));
             collider.physicsLayer = i;
             collider.collidesWithLayers = i;
 
+            var texture = entity.scene.content.Load<Texture2D>("Sprites/Shot/main");
+            tiro.addComponent(new Sprite(texture));
             // Não deixa a entidade sair do jogo
-            tiro.addComponent(new BorderTeleporter(Constants.ShootWidth, Constants.ShootHeight, 1280, 720));
+            tiro.addComponent(new BorderTeleporter(Constants.ShootRadius, Constants.ShootRadius, 1280, 720));
             // Esta entidade é um tiro
             tiro.addComponent(new Shot(Constants.ShootSpeed));
         }
