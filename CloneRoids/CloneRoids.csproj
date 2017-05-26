@@ -114,9 +114,9 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Nez-0.9.0\Nez-PCL\Nez.csproj">
+    <ProjectReference Include="..\..\Nez-0.9.0\Nez-PCL\Nez-0.9.0.csproj">
       <Project>{60b7197d-d0d5-405c-90a2-a56903e9b039}</Project>
-      <Name>Nez</Name>
+      <Name>Nez-0.9.0</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

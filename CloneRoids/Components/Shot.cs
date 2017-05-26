@@ -15,6 +15,11 @@ namespace CloneRoids.Components
 
         public int Speed;
 
+        /// <summary>
+        /// Move uma entidade considerando sua rotação, 
+        /// e então a destói
+        /// </summary>
+        /// <param name="speed">Velocidade da entidade</param>
         public Shot(int speed)
         {
             Speed = speed;
@@ -24,13 +29,14 @@ namespace CloneRoids.Components
         {
             base.onAddedToEntity();
 
+            // Armazena os valores necessários para
+            // calcular a velocidade. Assim economizamos
+            // poder de processamento
             sin = Mathf.sin(entity.transform.rotation);
             cos = Mathf.cos(entity.transform.rotation);
 
-            Core.schedule(3, (timer) =>
-            {
-                entity.destroy();
-            });
+            // Depois de 3 segundos, mate esta entidade
+            Core.schedule(3, t => entity.destroy());
         }
 
         public void update()

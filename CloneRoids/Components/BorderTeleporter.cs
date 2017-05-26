@@ -12,6 +12,13 @@ namespace CloneRoids.Components
     {
         public float Width, Height, ScreenWidth, ScreenHeight;
 
+        /// <summary>
+        /// Mantém uma entidade dentro da área informada
+        /// </summary>
+        /// <param name="width">Largura da entidade</param>
+        /// <param name="height">Altura de entidade</param>
+        /// <param name="screenWidth">Largura da área de contenção</param>
+        /// <param name="screenHeight">Altura da área de contenção</param>
         public BorderTeleporter(float width, float height, float screenWidth, float screenHeight)
         {
             Height = height;
@@ -23,8 +30,10 @@ namespace CloneRoids.Components
 
         public void update()
         {
+            // Pega a posição da entidade
             var pos = entity.transform.position;
 
+            // Se ela passou dos limites, corrija-a
             if (pos.X + Width < 0)
                 pos.X = ScreenWidth;
             else if (pos.X > ScreenWidth)
@@ -35,6 +44,7 @@ namespace CloneRoids.Components
             else if (pos.Y > ScreenHeight)
                 pos.Y = 0 - Height;
 
+            // Aplica a posição na entidade
             entity.transform.position = pos;
         }
     }
