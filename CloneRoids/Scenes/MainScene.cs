@@ -15,7 +15,7 @@ namespace CloneRoids.Scenes
 
         bool isTransitioning = false;
 
-        private Entity player;
+        public Entity Player;
 
         public override void initialize()
         {
@@ -34,15 +34,6 @@ namespace CloneRoids.Scenes
 
             var spawner = createEntity("spawner");
             spawner.addComponent(new AsteroidSpawner(this));
-
-            var asteroid = CreateAsteroid("asteroid");
-            asteroid.addComponent(new Sprite(texture));
-            asteroid.addComponent(new Asteroider(3, Constants.AsteroidSpeed, Constants.AsteroidRadius));
-            asteroid.transform.rotationDegrees = Random.nextInt(90) + 1;
-            asteroid.addCollider(new CircleCollider(Constants.AsteroidRadius))
-                .physicsLayer = layer;
-            asteroid.addComponent(new BorderTeleporter(Constants.AsteroidRadius, Constants.AsteroidRadius,
-                Constants.ScreenWidth, Constants.ScreenHeight));
         }
 
         private void reset()
@@ -104,19 +95,19 @@ namespace CloneRoids.Scenes
 
             isTransitioning = true;
 
-            player.enabled = false;
+            Player.enabled = false;
 
             var trans = new CrossFadeTransition();
             trans.onScreenObscured = () =>
             {
-                player.enabled = true;
+                Player.enabled = true;
 
-                var sla = player.getComponent<ArcadeRigidbody>();
+                var sla = Player.getComponent<ArcadeRigidbody>();
                 if (sla != null)
                     sla.setVelocity(Vector2.Zero);
 
-                player.transform.position = new Vector2(Constants.ScreenWidth / 2, Constants.ScreenHeight / 2);
-                player.transform.rotation = 0;
+                Player.transform.position = new Vector2(Constants.ScreenWidth / 2, Constants.ScreenHeight / 2);
+                Player.transform.rotation = 0;
                 isTransitioning = false;
 
                 reset();
@@ -128,7 +119,7 @@ namespace CloneRoids.Scenes
         private void CreatePlayer()
         {
             // Criamos o jogador
-            player = createEntity("player", new Vector2(Constants.ScreenWidth/2, Constants.ScreenHeight/2));
+            Player = createEntity("player", new Vector2(Constants.ScreenWidth/2, Constants.ScreenHeight/2));
 
             // Definir a camada a qual o jogador pertence
             int playerLayer = 0, playerCollisionLayer = 0;
@@ -136,7 +127,7 @@ namespace CloneRoids.Scenes
             Flags.setFlag(ref playerCollisionLayer, Constants.PlayerLayer);
 
             // Adiconar o colisor
-            var coll = player.addCollider(
+            var coll = Player.addCollider(
                 new BoxCollider(
                     Constants.PlayerWidth / 2,
                     Constants.PlayerWidth / 2,
@@ -148,27 +139,27 @@ namespace CloneRoids.Scenes
             coll.collidesWithLayers = playerCollisionLayer;
             coll.setLocalOffset(new Vector2(0, 0));
 
-            player.addComponent(new AsteroidCollider());
+            Player.addComponent(new AsteroidCollider());
 
             // Adiciona o sistema de física
-            player.addComponent(new ArcadeRigidbody())
+            Player.addComponent(new ArcadeRigidbody())
                 .shouldUseGravity = false;
 
             // Adiciona o nosso movimentador
-            player.addComponent(new PlayerPhysicsMovementer(
+            Player.addComponent(new PlayerPhysicsMovementer(
                 Constants.PlayerSpeed,
                 Constants.PlayerTurnSpeed));
 
             // Adiciona o gerador de tiros
-            player.addComponent(new Shooter());
+            Player.addComponent(new Shooter());
             // Adiciona o "consertador" de rotação
-            player.addComponent(new RotationFixer());
+            Player.addComponent(new RotationFixer());
             // Trava ele na tela. Se ele sair de um lado, vem do outro
-            player.addComponent(new BorderTeleporter(20, 30, 1280, 720));
+            Player.addComponent(new BorderTeleporter(20, 30, 1280, 720));
 
             // Carrega e adiciona a foto
             var playerTex = content.Load<Texture2D>("Sprites/Player/main");
-            player.addComponent(new Sprite(playerTex));
+            Player.addComponent(new Sprite(playerTex));
         }
     }
 }
