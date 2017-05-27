@@ -48,6 +48,7 @@
     <Compile Include="Components\PlayerMovementer.cs" />
     <Compile Include="Components\PlayerPhysicsMovementer.cs" />
     <Compile Include="Components\RotationFixer.cs" />
+    <Compile Include="Components\Sensor.cs" />
     <Compile Include="Components\Shooter.cs" />
     <Compile Include="Components\Shot.cs" />
     <Compile Include="Components\VirtualInputUpdater.cs" />

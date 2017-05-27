@@ -160,6 +160,8 @@ namespace CloneRoids.Scenes
             // Carrega e adiciona a foto
             var playerTex = content.Load<Texture2D>("Sprites/Player/main");
             Player.addComponent(new Sprite(playerTex));
+
+            Player.addComponent(new Sensor(this, new Vector2(100)));
         }
     }
 }
