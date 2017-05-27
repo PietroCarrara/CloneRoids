@@ -1,0 +1,7 @@
+﻿1>------ Compilação iniciada: Projeto: CloneRoids, Configuração: Debug Any CPU ------
+1>  Skipping C:/Users/Arthur/Documents/Visual Studio 2017/Projects/CloneRoids/CloneRoids/Content/Sprites/Player/main.png
+1>  Skipping C:/Users/Arthur/Documents/Visual Studio 2017/Projects/CloneRoids/CloneRoids/Content/Sprites/Shot/main.png
+1>  Skipping C:/Users/Arthur/Documents/Visual Studio 2017/Projects/CloneRoids/CloneRoids/Content/Sprites/Asteroid/main.png
+1>  Não é possível resolver o conflito entre "System.Runtime.Serialization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" e "System.Runtime.Serialization, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e, Retargetable=Yes". Escolhendo "System.Runtime.Serialization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" arbitrariamente.
+1>  CloneRoids -> C:\Users\Arthur\Documents\Visual Studio 2017\Projects\CloneRoids\CloneRoids\bin\DesktopGL\AnyCPU\Debug\CloneRoids.exe
+========== Compilar: 1 com êxito, 0 com falha, 1 atualizados, 0 ignorados ==========

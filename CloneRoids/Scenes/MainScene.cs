@@ -41,13 +41,18 @@ namespace CloneRoids.Scenes
             foreach (var ent in Projeteis)
             {
                 if(!ent.isDestroyed)
+                {
                     ent.destroy();
+                }
             }
 
             foreach (var ent in Asteroides)
             {
                 if (!ent.isDestroyed)
+                {
                     ent.destroy();
+                }
+                    
             }
 
             Projeteis.Clear();
