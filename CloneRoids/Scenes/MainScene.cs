@@ -27,13 +27,10 @@ namespace CloneRoids.Scenes
 
             CreatePlayer();
 
-            var texture = content.Load<Texture2D>("Sprites/Asteroid/main");
-
-            int layer = 0;
-            Flags.setFlag(ref layer, Constants.AsteroidLayer);
-
             var spawner = createEntity("spawner");
             spawner.addComponent(new AsteroidSpawner(this));
+
+            createEntity("controller").addComponent(new VirtualInputUpdater());
         }
 
         private void reset()

@@ -17,7 +17,7 @@ namespace CloneRoids.Components
         public void update()
         {
             // Crie um tiro quando a tecla for prossionada
-            if (Input.isKeyPressed(Constants.ShootKey))
+            if (Input.isKeyPressed(Constants.ShootKey) || VirtualInput.IsKeyPressed(Constants.ShootKey))
                 createShoot();
         }
 

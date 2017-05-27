@@ -50,12 +50,14 @@
     <Compile Include="Components\RotationFixer.cs" />
     <Compile Include="Components\Shooter.cs" />
     <Compile Include="Components\Shot.cs" />
+    <Compile Include="Components\VirtualInputUpdater.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Components\AsteroidSpawner.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\MainScene.cs" />
+    <Compile Include="VirtualInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -42,9 +42,9 @@ namespace CloneRoids.Components
             int velocity = 0;
 
             // Giro
-            if (Input.isKeyDown(Keys.Right))
+            if (Input.isKeyDown(Keys.Right) || VirtualInput.IsKeyDown(Keys.Right))
                 rotation = TurnSpeed;
-            else if (Input.isKeyDown(Keys.Left))
+            else if (Input.isKeyDown(Keys.Left) || VirtualInput.IsKeyDown(Keys.Left))
                 rotation = -TurnSpeed;
 
             // Aplica o giro (em radianos), e armazena
@@ -55,11 +55,11 @@ namespace CloneRoids.Components
             rb.velocity += -rb.velocity * Time.deltaTime;
 
             // Pra frente, pra traz
-            if (Input.isKeyDown(Keys.Down))
+            if (Input.isKeyDown(Keys.Down) || VirtualInput.IsKeyDown(Keys.Down))
             {
                 velocity = Speed;
             }
-            else if (Input.isKeyDown(Keys.Up))
+            else if (Input.isKeyDown(Keys.Up) || VirtualInput.IsKeyDown(Keys.Up))
             {
                 velocity = -Speed;
             }
