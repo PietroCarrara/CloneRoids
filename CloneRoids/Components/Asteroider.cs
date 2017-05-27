@@ -84,8 +84,6 @@ namespace CloneRoids.Components
         {
             var cena = entity.scene as MainScene;
 
-            var radius = this.radius / 1.5f;
-
             var texture = entity.scene.content.Load<Texture2D>("Sprites/Asteroid/main");
 
             int layer = 0;

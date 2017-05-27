@@ -13,6 +13,10 @@ namespace CloneRoids.Scenes
         public List<Entity> Projeteis = new List<Entity>();
         public List<Entity> Asteroides = new List<Entity>();
 
+        bool isTransitioning = false;
+
+        private Entity player;
+
         public override void initialize()
         {
             base.initialize();
@@ -28,13 +32,32 @@ namespace CloneRoids.Scenes
             int layer = 0;
             Flags.setFlag(ref layer, Constants.AsteroidLayer);
 
-            var sla = CreateAsteroid("asteroid");
-            sla.transform.rotation += 2;
-            var coll = sla.addCollider(new CircleCollider(30));
-            coll.physicsLayer = layer;
-            sla.addComponent(new Sprite(texture));
-            sla.addComponent(new Asteroider(3, 200, 30));
-            sla.addComponent(new BorderTeleporter(30, 30, Constants.ScreenWidth, Constants.ScreenHeight));
+            var asteroid = CreateAsteroid("asteroid");
+            asteroid.addComponent(new Sprite(texture));
+            asteroid.addComponent(new Asteroider(3, Constants.AsteroidSpeed, Constants.AsteroidRadius));
+            asteroid.transform.rotationDegrees = Random.nextInt(90) + 1;
+            asteroid.addCollider(new CircleCollider(Constants.AsteroidRadius))
+                .physicsLayer = layer;
+            asteroid.addComponent(new BorderTeleporter(Constants.AsteroidRadius, Constants.AsteroidRadius,
+                Constants.ScreenWidth, Constants.ScreenHeight));
+        }
+
+        private void reset()
+        {
+            foreach (var ent in Projeteis)
+            {
+                if(!ent.isDestroyed)
+                    ent.destroy();
+            }
+
+            foreach (var ent in Asteroides)
+            {
+                if (!ent.isDestroyed)
+                    ent.destroy();
+            }
+
+            Projeteis.Clear();
+            Asteroides.Clear();
         }
 
         public Entity CreateProjectile(string name)
@@ -71,10 +94,38 @@ namespace CloneRoids.Scenes
             }
         }
 
+        public void Lose()
+        {
+            if (isTransitioning)
+                return;
+
+            isTransitioning = true;
+
+            player.enabled = false;
+
+            var trans = new CrossFadeTransition();
+            trans.onScreenObscured = () =>
+            {
+                player.enabled = true;
+
+                var sla = player.getComponent<ArcadeRigidbody>();
+                if (sla != null)
+                    sla.setVelocity(Vector2.Zero);
+
+                player.transform.position = new Vector2(Constants.ScreenWidth / 2, Constants.ScreenHeight / 2);
+                player.transform.rotation = 0;
+                isTransitioning = false;
+
+                reset();
+            };
+
+            Core.startSceneTransition(trans);
+        }
+
         private void CreatePlayer()
         {
             // Criamos o jogador
-            var player = createEntity("player", new Vector2(Constants.ScreenWidth/2, Constants.ScreenHeight/2));
+            player = createEntity("player", new Vector2(Constants.ScreenWidth/2, Constants.ScreenHeight/2));
 
             // Definir a camada a qual o jogador pertence
             int playerLayer = 0, playerCollisionLayer = 0;

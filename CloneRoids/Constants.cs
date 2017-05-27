@@ -12,6 +12,8 @@ namespace CloneRoids
     {
         public const Keys ShootKey = Keys.Z;
 
+        public const int AsteroidSpeed = 300;
+
         public const int PlayerSpeed = 300;
         public const int PlayerTurnSpeed = 2;
 
@@ -20,7 +22,7 @@ namespace CloneRoids
 
         public const int ShootRadius = 10;
 
-        public const int AsteroidRadius = 20;
+        public const int AsteroidRadius = 30;
 
         public const int ScreenWidth = 1280;
         public const int ScreenHeight = 720;

@@ -29,7 +29,7 @@ namespace CloneRoids.Components
                 var result = new CollisionResult();
                 if (coll.collidesWith(asteroid.getCollider<Collider>(), out result))
                 {
-                    entity.destroy();
+                    cena.Lose();
                     return;
                 }
             }
