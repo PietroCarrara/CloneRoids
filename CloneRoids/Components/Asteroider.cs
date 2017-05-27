@@ -45,12 +45,18 @@ namespace CloneRoids.Components
         public void update()
         {
             var cena = entity.scene as MainScene;
-
+            CollisionResult result;
             var tiros = cena.Projeteis;
+
+            if (collider.collidesWith(cena.Player.getCollider<Collider>(), out result))
+            {
+                cena.Lose();
+
+                return;
+            }
 
             foreach (var tiro in tiros)
             {
-                CollisionResult result;
                 if (collider.collidesWith(tiro.getCollider<Collider>(), out result))
                 {
                     if (lives > 0)

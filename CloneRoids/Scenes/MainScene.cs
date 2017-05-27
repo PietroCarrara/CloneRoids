@@ -139,8 +139,6 @@ namespace CloneRoids.Scenes
             coll.collidesWithLayers = playerCollisionLayer;
             coll.setLocalOffset(new Vector2(0, 0));
 
-            Player.addComponent(new AsteroidCollider());
-
             // Adiciona o sistema de física
             Player.addComponent(new ArcadeRigidbody())
                 .shouldUseGravity = false;
