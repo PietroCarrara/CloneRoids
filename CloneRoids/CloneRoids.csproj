@@ -51,6 +51,7 @@
     <Compile Include="Components\Shooter.cs" />
     <Compile Include="Components\Shot.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Components\AsteroidSpawner.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

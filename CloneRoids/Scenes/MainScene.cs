@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace CloneRoids.Scenes
 {
-    class MainScene : Scene
+    public class MainScene : Scene
     {
         public List<Entity> Projeteis = new List<Entity>();
         public List<Entity> Asteroides = new List<Entity>();
@@ -31,6 +31,9 @@ namespace CloneRoids.Scenes
 
             int layer = 0;
             Flags.setFlag(ref layer, Constants.AsteroidLayer);
+
+            var spawner = createEntity("spawner");
+            spawner.addComponent(new AsteroidSpawner(this));
 
             var asteroid = CreateAsteroid("asteroid");
             asteroid.addComponent(new Sprite(texture));
