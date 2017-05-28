@@ -69,25 +69,11 @@ namespace CloneRoids.Scenes
 
         private void reset()
         {
-            foreach (var ent in Projeteis)
-            {
-                if (!ent.isDestroyed)
-                {
-                    ent.destroy();
-                }
-            }
-
-            foreach (var ent in Asteroides)
-            {
-                if (!ent.isDestroyed)
-                {
-                    ent.destroy();
-                }
-
-            }
-
-            Projeteis.Clear();
-            Asteroides.Clear();
+            while (Projeteis.Count > 0)
+                DestroyProjectile(Projeteis[0]);
+            
+            while (Asteroides.Count > 0)
+                DestroyAsteroid(Asteroides[0]);
         }
 
         public Entity CreateProjectile(string name)
