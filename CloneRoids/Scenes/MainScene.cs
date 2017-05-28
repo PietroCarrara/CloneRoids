@@ -143,11 +143,11 @@ namespace CloneRoids.Scenes
             if (currentSpecies >= sensores)
             {
                 int champion = 0;
-                float maiorPonto = speciesAsteroids[0] * 20 + speciesTempo[0];
+                float maiorPonto = speciesAsteroids[0] * 5 + speciesTempo[0];
 
                 for (int i = 0; i < sensores; i++)
                 {
-                    if (speciesAsteroids[i] * 20 + speciesTempo[i] > maiorPonto)
+                    if (speciesAsteroids[i] * 5 + speciesTempo[i] > maiorPonto)
                         champion = i;
                 }
 
