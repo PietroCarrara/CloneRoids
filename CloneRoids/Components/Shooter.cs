@@ -14,15 +14,21 @@ namespace CloneRoids.Components
 {
     public class Shooter : Component, IUpdatable
     {
+        float tempo = 2;
+
         public void update()
         {
+            tempo += Time.deltaTime;
+
             // Crie um tiro quando a tecla for prossionada
-            if (Input.isKeyPressed(Constants.ShootKey) || VirtualInput.IsKeyPressed(Constants.ShootKey))
+            if (Input.isKeyPressed(Constants.ShootKey) || VirtualInput.IsKeyPressed(Constants.ShootKey) && tempo >= 1)
                 createShoot();
         }
 
         private void createShoot()
         {
+            tempo = 0;
+
             // Pega a cena a qual esta entidade pertence,
             // e cria uma entidade nela
             var cena = entity.scene as MainScene;

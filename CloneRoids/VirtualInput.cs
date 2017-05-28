@@ -21,6 +21,8 @@ namespace CloneRoids
 
         public static void Reset()
         {
+            Tempo = 0;
+
             keyZ = keyUp = keyDown = keyLeft = keyRight = wasKeyZ = wasKeyUp = wasKeyDown = wasKeyLeft = wasKeyRight = false;
         }
 

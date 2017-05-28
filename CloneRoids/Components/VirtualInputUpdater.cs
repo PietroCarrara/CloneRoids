@@ -29,7 +29,7 @@ namespace CloneRoids.Components
 
             cena.Tempo += Time.deltaTime;
 
-            if (VirtualInput.Tempo > 15)
+            if (VirtualInput.Tempo > 5)
                 cena.Lose();
         }
     }

@@ -36,8 +36,10 @@ namespace CloneRoids.Components
         {
             get
             {
-                return entity.transform.position
-                    + offset;
+                var pos = entity.transform.position + offset;
+
+
+                return pos;
             }
         }
 
@@ -54,12 +56,6 @@ namespace CloneRoids.Components
 
                     return;
                 }
-
-                if (!shouldPress)
-                    VirtualInput.PressKey(key);
-                else
-                    VirtualInput.ReleaseKey(key);
-
             }
         }
 
@@ -67,7 +63,7 @@ namespace CloneRoids.Components
         {
             base.debugRender(graphics);
 
-            graphics.batcher.drawLine(entity.transform.position, Position,(shouldPress) ? Color.Green :Color.Red);
+            graphics.batcher.drawLine(entity.transform.position, Position,(shouldPress) ? Color.Green : Color.Red);
         }
     }
 }

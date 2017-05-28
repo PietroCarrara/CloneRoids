@@ -11,7 +11,7 @@ namespace CloneRoids.Scenes
 {
     public class MainScene : Scene
     {
-        public const int sensores = 7;
+        public const int sensores = 29;
 
         public int currentSpecies { get; private set; } = 0;
         private int[] speciesAsteroids = new int[sensores];
@@ -34,6 +34,8 @@ namespace CloneRoids.Scenes
         public override void initialize()
         {
             base.initialize();
+
+            Core.debugRenderEnabled = true;
 
             for (int i = 0; i < sensores; i++)
             {
