@@ -39,6 +39,24 @@ namespace CloneRoids.Components
                 var pos = entity.transform.position + offset;
 
 
+                if (pos.X > Constants.ScreenWidth)
+                {
+                    pos.X -= Constants.ScreenWidth;
+                }
+                else if (pos.X < 0)
+                {
+                    pos.X += Constants.ScreenWidth;
+                }
+
+                if (pos.Y > Constants.ScreenHeight)
+                {
+                    pos.Y -= Constants.ScreenHeight;
+                }
+                else if (pos.Y < 0)
+                {
+                    pos.Y += Constants.ScreenHeight;
+                }
+
                 return pos;
             }
         }
@@ -47,7 +65,7 @@ namespace CloneRoids.Components
         {
             foreach (var asteroid in cena.Asteroides)
             {
-                if(asteroid.getCollider<Collider>().bounds.contains(Position))
+                if (asteroid.getCollider<Collider>().bounds.contains(Position))
                 {
                     if (shouldPress)
                         VirtualInput.PressKey(key);
@@ -63,7 +81,7 @@ namespace CloneRoids.Components
         {
             base.debugRender(graphics);
 
-            graphics.batcher.drawLine(entity.transform.position, Position,(shouldPress) ? Color.Green : Color.Red);
+            graphics.batcher.drawLine(entity.transform.position, Position, (shouldPress) ? Color.Green : Color.Red);
         }
     }
 }
