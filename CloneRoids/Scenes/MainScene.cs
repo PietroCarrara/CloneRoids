@@ -5,13 +5,27 @@ using CloneRoids.Components;
 using Nez.Sprites;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System;
 
 namespace CloneRoids.Scenes
 {
     public class MainScene : Scene
     {
+        public const int sensores = 20;
+
+        public int currentSpecies { get; private set; } = 0;
+        private int[] speciesAsteroids = new int[sensores];
+        private float[] speciesTempo = new float[sensores];
+
+        public int geracao { get; private set; } = 0;
+
         public List<Entity> Projeteis = new List<Entity>();
         public List<Entity> Asteroides = new List<Entity>();
+
+        private Sensor[,] Sensores  = new Sensor[sensores, sensores];
+
+        public float Tempo = 0;
+        public int AsteroidsDestroyed = 0;
 
         bool isTransitioning = false;
 
@@ -21,11 +35,21 @@ namespace CloneRoids.Scenes
         {
             base.initialize();
 
+            for (int i = 0; i < sensores; i++)
+            {
+                for (int j = 0; j < sensores; j++)
+                {
+                    Sensores[i, j] = new Sensor(this);
+                }
+            }
+
             // Adiciona um renderizador normal
             addRenderer(new DefaultRenderer());
             clearColor = Color.Black;
 
             CreatePlayer();
+
+            addSensors();
 
             var spawner = createEntity("spawner");
             spawner.addComponent(new AsteroidSpawner(this));
@@ -33,11 +57,19 @@ namespace CloneRoids.Scenes
             createEntity("controller").addComponent(new VirtualInputUpdater());
         }
 
+        private void addSensors()
+        {
+            for (int i = 0; i < sensores; i++)
+            {
+                Player.addComponent(Sensores[currentSpecies, i].clone());
+            }
+        }
+
         private void reset()
         {
             foreach (var ent in Projeteis)
             {
-                if(!ent.isDestroyed)
+                if (!ent.isDestroyed)
                 {
                     ent.destroy();
                 }
@@ -49,7 +81,7 @@ namespace CloneRoids.Scenes
                 {
                     ent.destroy();
                 }
-                    
+
             }
 
             Projeteis.Clear();
@@ -67,7 +99,7 @@ namespace CloneRoids.Scenes
 
         public void DestroyProjectile(Entity proj)
         {
-            if(Projeteis.Remove(proj))
+            if (Projeteis.Remove(proj))
             {
                 proj.destroy();
             }
@@ -97,7 +129,46 @@ namespace CloneRoids.Scenes
 
             isTransitioning = true;
 
-            Player.enabled = false;
+            speciesAsteroids[currentSpecies] = AsteroidsDestroyed;
+            speciesTempo[currentSpecies] = Tempo;
+
+            VirtualInput.Reset();
+
+            Player.destroy();
+
+            currentSpecies++;
+
+            if(currentSpecies >= sensores)
+            {
+                int champion = 0;
+                float maiorPonto = speciesAsteroids[0] * 20 + speciesTempo[0];
+
+                for (int i = 0; i < sensores; i++)
+                {
+                    if (speciesAsteroids[i] * 20 + speciesTempo[i] > maiorPonto)
+                        champion = i;
+                }
+
+                for (int i = 0; i < sensores; i++)
+                {
+                    for (int j = 0; j < sensores; j++)
+                    {
+                        Sensores[i, j] = Sensores[champion, j];
+                    }
+
+                    Sensores[i, i] = new Sensor(this);
+                }
+
+                currentSpecies = 0;
+                geracao++;
+            }
+
+
+            CreatePlayer();
+            addSensors();
+
+            AsteroidsDestroyed = 0;
+            Tempo = 0;
 
             var trans = new CrossFadeTransition();
             trans.onScreenObscured = () =>
@@ -121,7 +192,7 @@ namespace CloneRoids.Scenes
         private void CreatePlayer()
         {
             // Criamos o jogador
-            Player = createEntity("player", new Vector2(Constants.ScreenWidth/2, Constants.ScreenHeight/2));
+            Player = createEntity("player", new Vector2(Constants.ScreenWidth / 2, Constants.ScreenHeight / 2));
 
             // Definir a camada a qual o jogador pertence
             int playerLayer = 0, playerCollisionLayer = 0;
@@ -160,8 +231,6 @@ namespace CloneRoids.Scenes
             // Carrega e adiciona a foto
             var playerTex = content.Load<Texture2D>("Sprites/Player/main");
             Player.addComponent(new Sprite(playerTex));
-
-            Player.addComponent(new Sensor(this, new Vector2(100)));
         }
     }
 }

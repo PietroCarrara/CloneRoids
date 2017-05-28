@@ -90,6 +90,8 @@ namespace CloneRoids.Components
         {
             var cena = entity.scene as MainScene;
 
+            cena.AsteroidsDestroyed++;
+
             var texture = entity.scene.content.Load<Texture2D>("Sprites/Asteroid/main");
 
             int layer = 0;

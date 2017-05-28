@@ -22,20 +22,22 @@ namespace CloneRoids.Components
         MainScene cena;
         Vector2 offset;
 
-        public Sensor(MainScene cena, Vector2 offset)
+        public Sensor(MainScene cena)
         {
             this.cena = cena;
-            this.offset = offset;
+            this.offset = new Vector2(Nez.Random.nextInt(Constants.ScreenWidth) - Constants.ScreenWidth / 2,
+                                      Nez.Random.nextInt(Constants.ScreenHeight) - Constants.ScreenHeight / 2);
 
             key = keys.randomItem();
-            shouldPress = true;//Nez.Random.chance(50);
+            shouldPress = Nez.Random.chance(50);
         }
 
         public Vector2 Position
         {
             get
             {
-                return entity.transform.position + offset;
+                return entity.transform.position
+                    + offset;
             }
         }
 
@@ -63,11 +65,9 @@ namespace CloneRoids.Components
 
         public override void debugRender(Graphics graphics)
         {
-            Debug.drawText(key + " " + shouldPress);
-
             base.debugRender(graphics);
 
-            graphics.batcher.drawLine(entity.transform.position, Position, Color.Red);
+            graphics.batcher.drawLine(entity.transform.position, Position,(shouldPress) ? Color.Green :Color.Red);
         }
     }
 }
