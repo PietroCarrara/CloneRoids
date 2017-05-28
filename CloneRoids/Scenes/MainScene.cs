@@ -11,7 +11,7 @@ namespace CloneRoids.Scenes
 {
     public class MainScene : Scene
     {
-        public const int sensores = 20;
+        public const int sensores = 7;
 
         public int currentSpecies { get; private set; } = 0;
         private int[] speciesAsteroids = new int[sensores];
@@ -181,11 +181,11 @@ namespace CloneRoids.Scenes
 
                 Player.transform.position = new Vector2(Constants.ScreenWidth / 2, Constants.ScreenHeight / 2);
                 Player.transform.rotation = 0;
-                isTransitioning = false;
 
                 reset();
             };
 
+            Core.schedule(trans.fadeDuration + .1f, (t) => isTransitioning = false);
             Core.startSceneTransition(trans);
         }
 

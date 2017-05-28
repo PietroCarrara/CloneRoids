@@ -62,7 +62,7 @@ namespace CloneRoids.Components
                     if (lives > 0)
                         spawnChildren();
 
-                    entity.destroy();
+                    cena.DestroyAsteroid(entity);
 
                     cena.DestroyProjectile(tiro);
                     

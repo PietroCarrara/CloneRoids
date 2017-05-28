@@ -32,7 +32,7 @@ namespace CloneRoids.Components
 
         public void update()
         {
-            if (!(cena.Asteroides.Count < 3))
+            if (cena.Asteroides.Count > 4)
                 return;
 
             var r = Nez.Random.nextInt(4);
