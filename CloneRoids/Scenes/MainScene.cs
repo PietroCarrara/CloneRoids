@@ -11,7 +11,7 @@ namespace CloneRoids.Scenes
 {
     public class MainScene : Scene
     {
-        public const int sensores = 29;
+        public const int sensores = 25;
 
         public int currentSpecies { get; private set; } = 0;
         private int[] speciesAsteroids = new int[sensores];
@@ -22,7 +22,7 @@ namespace CloneRoids.Scenes
         public List<Entity> Projeteis = new List<Entity>();
         public List<Entity> Asteroides = new List<Entity>();
 
-        private Sensor[,] Sensores  = new Sensor[sensores, sensores];
+        private Sensor[,] Sensores = new Sensor[sensores, sensores];
 
         public float Tempo = 0;
         public int AsteroidsDestroyed = 0;
@@ -140,7 +140,7 @@ namespace CloneRoids.Scenes
 
             currentSpecies++;
 
-            if(currentSpecies >= sensores)
+            if (currentSpecies >= sensores)
             {
                 int champion = 0;
                 float maiorPonto = speciesAsteroids[0] * 20 + speciesTempo[0];
@@ -155,10 +155,11 @@ namespace CloneRoids.Scenes
                 {
                     for (int j = 0; j < sensores; j++)
                     {
-                        Sensores[i, j] = Sensores[champion, j];
+                        if (j < i)
+                            Sensores[i, j] = new Sensor(this);
+                        else
+                            Sensores[i, j] = Sensores[champion, j];
                     }
-
-                    Sensores[i, i] = new Sensor(this);
                 }
 
                 currentSpecies = 0;
