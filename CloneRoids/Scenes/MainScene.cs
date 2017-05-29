@@ -11,7 +11,7 @@ namespace CloneRoids.Scenes
 {
     public class MainScene : Scene
     {
-        public const int sensores = 25;
+        public const int sensores = 50;
 
         public int currentSpecies { get; private set; } = 0;
         private int[] speciesAsteroids = new int[sensores];
@@ -128,24 +128,33 @@ namespace CloneRoids.Scenes
 
             if (currentSpecies >= sensores)
             {
-                int champion = 0;
+                int champion = 0, second = 0;
                 float maiorPonto = speciesAsteroids[0] * 5 + speciesTempo[0];
 
                 for (int i = 0; i < sensores; i++)
                 {
                     if (speciesAsteroids[i] * 5 + speciesTempo[i] > maiorPonto)
+                    {
+                        second = champion;
                         champion = i;
+                    }
                 }
+
+                var sens = Sensores.Clone() as Sensor[,];
+
 
                 for (int i = 0; i < sensores; i++)
                 {
                     for (int j = 0; j < sensores; j++)
                     {
                         if (j < i)
-                            Sensores[i, j] = new Sensor(this);
+                            Sensores[i, j] = sens[second, j];
                         else
-                            Sensores[i, j] = Sensores[champion, j];
+                            Sensores[i, j] = sens[champion, j];
                     }
+
+                    while (Nez.Random.chance(.4f))
+                        Sensores[i, Nez.Random.nextInt(sensores)] = new Sensor(this);
                 }
 
                 currentSpecies = 0;

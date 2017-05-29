@@ -29,7 +29,7 @@ namespace CloneRoids.Components
                                       Nez.Random.nextInt(Constants.ScreenHeight) - Constants.ScreenHeight / 2);
 
             key = keys.randomItem();
-            shouldPress = Nez.Random.chance(50);
+            shouldPress = Nez.Random.chance(.5f);
         }
 
         public Vector2 Position
