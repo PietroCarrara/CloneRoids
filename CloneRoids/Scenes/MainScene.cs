@@ -12,7 +12,21 @@ namespace CloneRoids.Scenes
     public class MainScene : Scene
     {
         public const int sensores = 50;
-
+     
+	public float MediaGeracao
+        {
+            get {
+                int i=0;
+                float Cont=0;
+                for(i=1; i <= currentSpecies; i++)
+                {
+                    Cont = Cont + speciesTempo[i - 1];
+                }
+                
+                return Cont / i;
+            }
+        }
+        
         public int currentSpecies { get; private set; } = 0;
         private int[] speciesAsteroids = new int[sensores];
         private float[] speciesTempo = new float[sensores];
