@@ -17,14 +17,13 @@ namespace CloneRoids.Scenes
         {
            get
             {
-                 int i = 0;
                  float Cont = 0;
-                 for(i=1; i <= currentSpecies; i++)
+                 for(int i = 0; i < currentSpecies; i++)
                  {
-                     Cont = Cont + speciesTempo[i - 1];
+                     Cont = Cont + speciesTempo[i];
                  }
                  
-                 return Cont / i;
+                 return (Cont + Tempo) / (currentSpecies + 1);
              }
        }
         
