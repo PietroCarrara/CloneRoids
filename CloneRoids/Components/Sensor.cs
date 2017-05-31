@@ -65,7 +65,13 @@ namespace CloneRoids.Components
         {
             foreach (var asteroid in cena.Asteroides)
             {
-                if (asteroid.getCollider<Collider>().bounds.contains(Position))
+                int i = 0;
+                Flags.setFlag(ref i, Constants.AsteroidLayer);
+
+                var sla = Physics.linecast(entity.transform.position, Position, i);
+
+                // Se a linha bateu em alguém
+                if(sla.collider != null)
                 {
                     if (shouldPress)
                         VirtualInput.PressKey(key);
