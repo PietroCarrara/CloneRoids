@@ -37,8 +37,7 @@ namespace CloneRoids.Components
             get
             {
                 var pos = entity.transform.position + offset;
-
-
+                
                 if (pos.X > Constants.ScreenWidth)
                 {
                     pos.X -= Constants.ScreenWidth;

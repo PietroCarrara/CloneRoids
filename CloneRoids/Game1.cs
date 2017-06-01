@@ -9,7 +9,7 @@ namespace CloneRoids
     /// </summary>
     public class Game1 : Core
     {
-        public Game1() : base(Constants.ScreenWidth, Constants.ScreenHeight, true, false, "CloneRoids")
+        public Game1() : base(Constants.ScreenWidth, Constants.ScreenHeight, false, false, "CloneRoids")
         {
             Core.pauseOnFocusLost = false;
         } 
