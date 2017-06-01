@@ -15,18 +15,34 @@ namespace CloneRoids.Scenes
 
         public float MediaGeracao
         {
-           get
+            get
             {
-                 float Cont = 0;
-                 for(int i = 0; i < currentSpecies; i++)
-                 {
-                     Cont = Cont + speciesTempo[i];
-                 }
-                 
-                 return (Cont + Tempo) / (currentSpecies + 1);
-             }
-       }
-        
+                float Cont = 0;
+                for (int i = 0; i < currentSpecies; i++)
+                {
+                    Cont = Cont + speciesTempo[i];
+                }
+
+                return (Cont + Tempo) / (currentSpecies + 1);
+            }
+        }
+
+        public float Pico
+        {
+            get
+            {
+                float maior = Tempo;
+
+                for(int i = 0; i < currentSpecies; i++)
+                {
+                    if (speciesTempo[i] > maior)
+                        maior = speciesTempo[i];
+                }
+
+                return maior;
+            }
+        }
+
         public int currentSpecies { get; private set; } = 0;
         private int[] speciesAsteroids = new int[sensores];
         private float[] speciesTempo = new float[sensores];
@@ -85,7 +101,7 @@ namespace CloneRoids.Scenes
         {
             while (Projeteis.Count > 0)
                 DestroyProjectile(Projeteis[0]);
-            
+
             while (Asteroides.Count > 0)
                 DestroyAsteroid(Asteroides[0]);
         }
@@ -167,7 +183,7 @@ namespace CloneRoids.Scenes
                             Sensores[i, j] = sens[champion, j];
                     }
 
-                    while (Nez.Random.chance(.4f))
+                    while (Nez.Random.chance(i / sensores / 2))
                         Sensores[i, Nez.Random.nextInt(sensores)] = new Sensor(this);
                 }
 
