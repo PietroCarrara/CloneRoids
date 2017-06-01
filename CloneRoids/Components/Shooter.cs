@@ -40,7 +40,10 @@ namespace CloneRoids.Components
             Flags.setFlag(ref i, Constants.ShootLayer);
 
             // Adiciona e configura  um colisor na entidade que criamos
-            var collider = tiro.addCollider(new CircleCollider(Constants.ShootRadius));
+            var collider = tiro.addCollider(new InvisibleCollider(Constants.ShootRadius));
+            {
+
+            };
             collider.physicsLayer = i;
             collider.collidesWithLayers = i;
 

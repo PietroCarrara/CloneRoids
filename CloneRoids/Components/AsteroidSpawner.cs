@@ -69,7 +69,7 @@ namespace CloneRoids.Components
             asteroid.addComponent(new Sprite(Texture));
             asteroid.addComponent(new Asteroider(3, Constants.AsteroidSpeed, Constants.AsteroidRadius));
             asteroid.transform.rotationDegrees = Nez.Random.nextInt(90) + 1;
-            asteroid.addCollider(new CircleCollider(Constants.AsteroidRadius))
+            asteroid.addCollider(new InvisibleCollider(Constants.AsteroidRadius))
                 .physicsLayer = layer;
             asteroid.addComponent(new BorderTeleporter(Constants.AsteroidRadius, Constants.AsteroidRadius,
                 Constants.ScreenWidth, Constants.ScreenHeight));

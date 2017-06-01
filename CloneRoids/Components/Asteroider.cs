@@ -102,7 +102,7 @@ namespace CloneRoids.Components
             child1.addComponent(new Asteroider(lives - 1, Velocity * 1.1f, radius));
             child1.transform.rotationDegrees = entity.transform.rotationDegrees + Nez.Random.nextInt(90) + 1;
             child1.transform.position = entity.transform.position;
-            child1.addCollider(new CircleCollider(radius))
+            child1.addCollider(new InvisibleCollider(radius))
                 .physicsLayer = layer;
             child1.addComponent(new BorderTeleporter(radius, radius,
                 Constants.ScreenWidth, Constants.ScreenHeight));
@@ -112,7 +112,7 @@ namespace CloneRoids.Components
             child2.addComponent(new Asteroider(lives - 1, Velocity * 1.25f, radius));
             child2.transform.rotationDegrees = entity.transform.rotationDegrees - Nez.Random.nextInt(90) + 1;
             child2.transform.position = entity.transform.position;
-            child2.addCollider(new CircleCollider(radius))
+            child2.addCollider(new InvisibleCollider(radius))
                 .physicsLayer = layer;
             child2.addComponent(new BorderTeleporter(radius, radius,
                 Constants.ScreenWidth, Constants.ScreenHeight));
